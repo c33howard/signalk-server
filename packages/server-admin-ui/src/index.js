@@ -21,6 +21,8 @@ import Full from './containers/Full/'
 
 import { openServerEventsConnection } from './actions'
 
+import { handleSourcePriorityPathChanged, SOURCEPRIOS_PATH_CHANGED } from './views/ServerConfig/SourcePreferences'
+
 import escape from 'escape-html'
 import Convert from 'ansi-to-html'
 
@@ -59,7 +61,7 @@ const state = {
     rememberDebug: false
   },
   restoreStatus: {},
-  sourcePriorities: {}
+  sourcePriorities: []
 }
 
 let store = createStore(
@@ -228,10 +230,18 @@ let store = createStore(
       }
     }
     if ( action.type === 'SOURCEPRIORITIES' ) {
+      const sourcePrioritiesMap = action.data
+      const sourcePriorities = Object.keys(
+        sourcePrioritiesMap
+      ).map((key, i) => ({path: key, priorities: sourcePrioritiesMap[key]}))
+
       return {
         ...state,
-        sourcePriorities: action.data
+        sourcePriorities
       }
+    }
+    if ( action.type === SOURCEPRIOS_PATH_CHANGED ) {
+      return handleSourcePriorityPathChanged(state, action)
     }
     return state
   },
