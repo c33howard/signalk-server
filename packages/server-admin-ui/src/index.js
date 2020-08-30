@@ -28,8 +28,10 @@ import {
   handleSourcePriorityPathDeleted,
   SOURCEPRIOS_PRIO_CHANGED,
   handleSourcePriorityPriorityChanged,
+  SOURCEPRIOS_PRIO_DELETED,
   handleSourcePriorityPriorityDeleted,
-  SOURCEPRIOS_PRIO_DELETED
+  SOURCEPRIOS_PRIO_MOVED,
+  handleSourcePriorityPriorityMoved
 } from './views/ServerConfig/SourcePreferences'
 
 import escape from 'escape-html'
@@ -260,6 +262,9 @@ let store = createStore(
     }
     if ( action.type === SOURCEPRIOS_PRIO_DELETED) {
       return handleSourcePriorityPriorityDeleted(state, action)
+    }
+    if ( action.type === SOURCEPRIOS_PRIO_MOVED) {
+      return handleSourcePriorityPriorityMoved(state, action)
     }
     return state
   },
