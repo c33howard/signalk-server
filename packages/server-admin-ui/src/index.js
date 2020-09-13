@@ -66,7 +66,8 @@ const state = {
   sourcePrioritiesData: {
     sourcePriorities: [],
     saveState: {
-      dirty: false
+      dirty: false,
+      timeoutsOk: true
     }
   }
 }
@@ -248,7 +249,8 @@ let store = createStore(
         sourcePrioritiesData: {
           sourcePriorities,
           saveState: {
-            dirty: false
+            dirty: false,
+            timeoutsOk: true
           }
         }
       }
